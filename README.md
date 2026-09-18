@@ -184,7 +184,12 @@ ReportLab
 Development
 Git
 GitHub
-Project Structure
+
+
+
+## Project Structure
+
+```text
 AViGuard/
 │
 ├── app.py
@@ -216,80 +221,118 @@ AViGuard/
 ├── assets/
 ├── outputs/
 └── tests/
-Installation
-1. Clone the repository
+```
+
+---
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/Rushikannan2/AViGuard.git
 cd AViGuard
-2. Create a virtual environment
+```
+
+### 2. Create a Virtual Environment
+
+```bash
 python -m venv .venv
-3. Activate the environment
-Windows
+```
+
+### 3. Activate the Environment
+
+**Windows:**
+
+```bash
 .venv\Scripts\activate
-Linux / macOS
+```
+
+**Linux / macOS:**
+
+```bash
 source .venv/bin/activate
-4. Install dependencies
+```
+
+### 4. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-Run Locally
+```
+
+---
+
+## Run Locally
 
 Start the Streamlit application:
 
+```bash
 streamlit run app.py
+```
 
 The application will be available at the local Streamlit URL displayed in the terminal.
 
-Live Demo
+---
+
+## Live Demo
 
 Try the deployed application:
 
-https://aviguard-multimodal.streamlit.app/
+**[AViGuard Live Demo](https://aviguard-multimodal.streamlit.app/)**
 
-Example Workflow
+---
+
+## Example Workflow
+
+```text
 Input Video
      │
      ├──► Video Frames ──► OpenCV ──► R3D-18 ──► Visual Evidence
      │
      └──► Audio ──► FFmpeg ──► Librosa / AST ──► Audio Evidence
-                                               │
-                                               ▼
-                                      Quality Assessment
-                                               │
-                                               ▼
-                                      Reliability Estimation
-                                               │
-                                               ▼
-                                         Adaptive Fusion
-                                               │
-                                               ▼
-                                    Cross-Modal Consistency
-                                               │
-                                               ▼
-                                      Interpretable Report
-Example Output
+                                                    │
+                                                    ▼
+                                           Quality Assessment
+                                                    │
+                                                    ▼
+                                           Reliability Estimation
+                                                    │
+                                                    ▼
+                                             Adaptive Fusion
+                                                    │
+                                                    ▼
+                                         Cross-Modal Consistency
+                                                    │
+                                                    ▼
+                                           Interpretable Report
+```
+
+---
+
+## Example Output
 
 For a video containing a musical performance, AViGuard can independently identify visual and acoustic evidence such as:
 
-Visual Prediction
-Playing Guitar
-
-Audio Prediction
-Music
-
-Cross-Modal Agreement
-High
-
-Fusion
-Visual + Audio Reliability-Weighted Evidence
+| Component | Example |
+|---|---|
+| Visual Prediction | Playing Guitar |
+| Audio Prediction | Music |
+| Cross-Modal Agreement | High |
+| Fusion | Visual + Audio Reliability-Weighted Evidence |
 
 The exact predictions, confidence values, reliability values, and fusion contributions depend on the uploaded media.
 
-Reliability-Aware Fusion
+---
+
+## Reliability-Aware Fusion
 
 A fixed 50/50 fusion strategy can be unreliable when one modality is degraded.
 
-AViGuard therefore considers both model confidence and signal quality when estimating the contribution of each modality.
+AViGuard therefore considers both **model confidence** and **signal quality** when estimating the contribution of each modality.
 
 Conceptually:
 
+```text
 Visual Confidence ───────┐
                          ├──► Visual Reliability
 Video Quality ───────────┘
@@ -301,13 +344,17 @@ Audio Quality ───────────┘
 Visual Reliability ──────┐
                          ├──► Adaptive Fusion
 Audio Reliability ───────┘
+```
 
 This allows a weaker modality to contribute less evidence when its estimated reliability is low.
 
-Missing Audio Handling
+---
+
+## Missing Audio Handling
 
 AViGuard supports videos that do not contain a usable audio stream.
 
+```text
 Video
   │
   ├──► Visual Analysis ──► Available
@@ -316,19 +363,27 @@ Video
                               │
                               ▼
                        Audio Reliability = 0
+```
 
 The visual analysis can continue without requiring an audio stream.
 
-Limitations
-The visual and audio classifiers are pretrained models and are not trained specifically on a custom AViGuard dataset.
-Cross-modal consistency uses a semantic category mapping rather than a learned multimodal neural network.
-Fusion scores represent evidence weighting and should not be interpreted as calibrated probabilities.
-Classification performance depends on the capabilities and label spaces of the underlying pretrained models.
-CPU inference can be slower than GPU inference for larger videos.
-Future Improvements
-Fine-tune modality-specific models on domain-specific audio-visual datasets.
-Learn the fusion function using supervised multimodal training data.
-Add temporal event localization.
-Explore joint audio-visual representation learning.
-Add systematic benchmark evaluation using multimodal classification metrics.
-Optimize model loading and inference for production deployment.
+---
+
+## Limitations
+
+- The visual and audio classifiers are pretrained models and are not trained specifically on a custom AViGuard dataset.
+- Cross-modal consistency uses a semantic category mapping rather than a learned multimodal neural network.
+- Fusion scores represent evidence weighting and should not be interpreted as calibrated probabilities.
+- Classification performance depends on the capabilities and label spaces of the underlying pretrained models.
+- CPU inference can be slower than GPU inference for larger videos.
+
+---
+
+## Future Improvements
+
+- Fine-tune modality-specific models on domain-specific audio-visual datasets.
+- Learn the fusion function using supervised multimodal training data.
+- Add temporal event localization.
+- Explore joint audio-visual representation learning.
+- Add systematic benchmark evaluation using multimodal classification metrics.
+- Optimize model loading and inference for production deployment.
