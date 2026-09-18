@@ -80,7 +80,7 @@ For an uploaded video, AViGuard:
                  │ + Diagnostics + Report    │
                  └──────────────────────────┘
 
-'''
+
 Key Features
 Video Analysis
 Video frame sampling using OpenCV
