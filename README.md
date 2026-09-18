@@ -83,29 +83,35 @@ For an uploaded video, AViGuard:
 
 ---
 
-Key Features
-Video Analysis
-Video frame sampling using OpenCV
-Pretrained R3D-18 video classification
-Kinetics-400 action recognition
-Visual confidence estimation
-Video brightness analysis
-Video sharpness analysis
-Audio Analysis
-Audio extraction using FFmpeg
-16 kHz mono waveform preprocessing
-Audio signal analysis using Librosa
-Pretrained Audio Spectrogram Transformer (AST)
-AudioSet-based acoustic-event classification
-RMS energy analysis
-Non-silent ratio analysis
-Graceful handling of videos without an audio stream
-Reliability-Aware Fusion
+## Key Features
+
+### Video Analysis
+
+- Video frame sampling using **OpenCV**
+- Pretrained **R3D-18** video classification
+- **Kinetics-400** action recognition
+- Visual confidence estimation
+- Video brightness analysis
+- Video sharpness analysis
+
+### Audio Analysis
+
+- Audio extraction using **FFmpeg**
+- 16 kHz mono waveform preprocessing
+- Audio signal analysis using **Librosa**
+- Pretrained **Audio Spectrogram Transformer (AST)**
+- **AudioSet**-based acoustic-event classification
+- RMS energy analysis
+- Non-silent ratio analysis
+- Graceful handling of videos without an audio stream
+
+### Reliability-Aware Fusion
 
 AViGuard does not simply assign equal weights to audio and video.
 
-The system estimates modality reliability using model confidence and signal-quality information.
+The system estimates modality reliability using **model confidence** and **signal-quality information**.
 
+```text
 Model Confidence
        +
 Signal Quality
@@ -115,75 +121,96 @@ Modality Reliability
        │
        ▼
 Fusion Weight
+```
 
 The resulting weights determine how strongly visual and acoustic evidence contributes to the combined analysis.
 
-Cross-Modal Consistency
+### Cross-Modal Consistency
 
 Predictions from the visual and audio models are mapped into shared semantic categories to evaluate whether the two modalities provide consistent evidence.
 
 Example:
 
+```text
 Visual Evidence
 Playing Guitar
       │
       ▼
-  Music Category
+ Music Category
       ▲
       │
 Audio Evidence
 Music
+```
 
 This allows the system to report agreement or disagreement between the modalities.
 
-Interpretability
+### Interpretability
 
 The application provides:
 
-Top visual predictions
-Top audio predictions
-Model confidence
-Modality reliability
-Fusion contribution
-Cross-modal agreement
-Video quality diagnostics
-Audio quality diagnostics
-Acoustic waveform visualization
-Sampled video-frame inspection
-Decision explanation
-PDF analysis reports
+- Top visual predictions
+- Top audio predictions
+- Model confidence
+- Modality reliability
+- Fusion contribution
+- Cross-modal agreement
+- Video quality diagnostics
+- Audio quality diagnostics
+- Acoustic waveform visualization
+- Sampled video-frame inspection
+- Decision explanation
+- PDF analysis reports
 
-Models
-Modality	Model	Pretraining
-Video	R3D-18	Kinetics-400
-Audio	Audio Spectrogram Transformer (AST)	AudioSet
+---
 
-The pretrained models provide modality-specific predictions. AViGuard adds the reliability estimation, adaptive fusion, and cross-modal consistency analysis layer on top of these outputs.
+## Models
 
-Technology Stack
-Machine Learning
-Python
-PyTorch
-Torchvision
-Hugging Face Transformers
-Audio Processing
-Librosa
-SoundFile
-FFmpeg
-NumPy
-SciPy
-Video Processing
-OpenCV
-Torchvision video models
-Video frame sampling
-Image preprocessing
-Application
-Streamlit
-Matplotlib
-ReportLab
-Development
-Git
-GitHub
+| Modality | Model | Pretraining |
+|---|---|---|
+| Video | R3D-18 | Kinetics-400 |
+| Audio | Audio Spectrogram Transformer (AST) | AudioSet |
+
+The pretrained models provide modality-specific predictions. AViGuard adds the **reliability estimation, adaptive fusion, and cross-modal consistency analysis** layer on top of these outputs.
+
+---
+
+## Technology Stack
+
+### Machine Learning
+
+- Python
+- PyTorch
+- Torchvision
+- Hugging Face Transformers
+
+### Audio Processing
+
+- Librosa
+- SoundFile
+- FFmpeg
+- NumPy
+- SciPy
+
+### Video Processing
+
+- OpenCV
+- Torchvision video models
+- Video frame sampling
+- Image preprocessing
+
+### Application
+
+- Streamlit
+- Matplotlib
+- ReportLab
+
+### Development
+
+- Git
+- GitHub
+
+---
 
 
 
