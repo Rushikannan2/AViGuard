@@ -57,103 +57,359 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* ---------- Global layout ---------- */
     .main {
+        padding-top: 0.75rem;
+    }
+
+    .block-container {
+        max-width: 1450px;
         padding-top: 1rem;
+        padding-bottom: 3rem;
     }
 
-    .hero {
-        padding: 2rem 2rem 1.5rem 2rem;
-        border-radius: 18px;
-        background: linear-gradient(
-            135deg,
-            #111827 0%,
-            #1f2937 50%,
-            #312e81 100%
-        );
-        color: white;
-        margin-bottom: 1.5rem;
+    /* ---------- Hero ---------- */
+    .av-hero {
+        position: relative;
+        overflow: hidden;
+        padding: 2rem 2.2rem 1.75rem 2.2rem;
+        border-radius: 22px;
+        background:
+            radial-gradient(circle at 88% 18%, rgba(99,102,241,.34), transparent 30%),
+            radial-gradient(circle at 12% 100%, rgba(14,165,233,.22), transparent 32%),
+            linear-gradient(135deg, #0b1220 0%, #172033 55%, #25245a 100%);
+        color: #ffffff;
+        margin-bottom: 1.25rem;
+        border: 1px solid rgba(255,255,255,.10);
+        box-shadow: 0 14px 35px rgba(15,23,42,.16);
     }
 
-    .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 0.3rem;
-    }
-
-    .hero p {
-        font-size: 1.15rem;
-        opacity: 0.9;
-    }
-
-    .section-title {
-        font-size: 1.45rem;
+    .av-hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        padding: .35rem .65rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,.10);
+        border: 1px solid rgba(255,255,255,.14);
+        font-size: .78rem;
         font-weight: 700;
-        margin-top: 1rem;
-        margin-bottom: 0.7rem;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        margin-bottom: .8rem;
     }
 
-    .info-card {
-        padding: 1rem;
-        border-radius: 12px;
-        border: 1px solid #e5e7eb;
-        background: #f9fafb;
-        margin-bottom: 0.7rem;
+    .av-hero h1 {
+        font-size: clamp(2.25rem, 5vw, 3.35rem);
+        line-height: 1.05;
+        margin: 0 0 .55rem 0;
+        letter-spacing: -.035em;
+    }
+
+    .av-hero p {
+        max-width: 900px;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: rgba(255,255,255,.86);
+        margin: 0;
+    }
+
+    .av-hero-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .45rem;
+        margin-top: 1rem;
+    }
+
+    .av-chip {
+        display: inline-block;
+        padding: .32rem .62rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.13);
+        color: rgba(255,255,255,.88);
+        font-size: .76rem;
+        font-weight: 600;
+    }
+
+    /* ---------- Sections ---------- */
+    .section-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -.02em;
+        margin-top: 1rem;
+        margin-bottom: .65rem;
+    }
+
+    .section-subtitle {
+        color: #64748b;
+        font-size: .92rem;
+        margin-top: -.25rem;
+        margin-bottom: .85rem;
+    }
+
+    .info-card,
+    .evidence-card {
+        padding: 1rem 1.1rem;
+        border-radius: 15px;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        margin-bottom: .7rem;
+        box-shadow: 0 5px 16px rgba(15,23,42,.045);
+    }
+
+    .info-card strong,
+    .evidence-card strong {
+        color: #0f172a;
     }
 
     .decision-card {
-        padding: 1.2rem;
-        border-radius: 14px;
-        border: 1px solid #dbeafe;
-        background: #eff6ff;
-        margin: 0.6rem 0;
+        padding: 1.15rem;
+        border-radius: 15px;
+        border: 1px solid #bfdbfe;
+        background: linear-gradient(135deg, #eff6ff, #f8fbff);
+        margin: .6rem 0;
+        box-shadow: 0 5px 16px rgba(37,99,235,.06);
     }
 
-    .evidence-card {
-        padding: 1rem;
+    .status-good,
+    .status-warning,
+    .status-bad {
+        padding: .78rem 1rem;
         border-radius: 12px;
-        border: 1px solid #e5e7eb;
-        background: white;
-        margin-bottom: 0.7rem;
+        font-weight: 700;
+        margin: .45rem 0;
     }
 
     .status-good {
-        padding: 0.8rem 1rem;
-        border-radius: 10px;
         background: #ecfdf5;
         border: 1px solid #a7f3d0;
         color: #065f46;
-        font-weight: 600;
     }
 
     .status-warning {
-        padding: 0.8rem 1rem;
-        border-radius: 10px;
         background: #fffbeb;
         border: 1px solid #fde68a;
         color: #92400e;
-        font-weight: 600;
     }
 
     .status-bad {
-        padding: 0.8rem 1rem;
-        border-radius: 10px;
         background: #fef2f2;
         border: 1px solid #fecaca;
         color: #991b1b;
-        font-weight: 600;
     }
 
     .small-note {
-        color: #6b7280;
-        font-size: 0.9rem;
+        color: #64748b;
+        font-size: .84rem;
+        line-height: 1.55;
     }
 
     .formula-box {
-        padding: 1rem;
+        padding: .9rem 1rem;
         border-radius: 12px;
-        background: #111827;
-        color: white;
-        font-family: monospace;
-        margin: 0.8rem 0;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        margin: .75rem 0;
+        border: 1px solid #1e293b;
+    }
+
+    /* ---------- Sidebar ---------- */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+        border-right: 1px solid #e2e8f0;
+    }
+
+    section[data-testid="stSidebar"] > div {
+        padding-top: 1rem;
+    }
+
+    .av-side-brand {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        margin-bottom: .2rem;
+    }
+
+    .av-side-logo {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #0f172a, #3730a3);
+        color: #fff;
+        font-size: 1.25rem;
+        box-shadow: 0 7px 16px rgba(49,46,129,.20);
+    }
+
+    .av-side-title {
+        font-size: 1.18rem;
+        font-weight: 850;
+        color: #0f172a;
+        line-height: 1.1;
+    }
+
+    .av-side-subtitle {
+        color: #64748b;
+        font-size: .72rem;
+        margin-top: .12rem;
+    }
+
+    .av-side-label {
+        font-size: .68rem;
+        font-weight: 800;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin: 1rem 0 .45rem 0;
+    }
+
+    .av-pipeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin: .35rem 0 .75rem 0;
+    }
+
+    .av-node {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: .65rem;
+        padding: .62rem .68rem;
+        border: 1px solid #dbe3ee;
+        border-radius: 12px;
+        background: rgba(255,255,255,.88);
+        box-shadow: 0 3px 9px rgba(15,23,42,.035);
+    }
+
+    .av-node-icon {
+        flex: 0 0 30px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        font-size: .92rem;
+    }
+
+    .av-node-main {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .av-node-title {
+        color: #0f172a;
+        font-size: .78rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    .av-node-meta {
+        color: #64748b;
+        font-size: .66rem;
+        line-height: 1.35;
+        margin-top: .13rem;
+    }
+
+    .av-arrow {
+        text-align: center;
+        color: #94a3b8;
+        font-size: .72rem;
+        line-height: .9;
+        padding: .13rem 0;
+    }
+
+    .av-input .av-node-icon { background: #e0f2fe; color: #0369a1; }
+    .av-video .av-node-icon { background: #dbeafe; color: #1d4ed8; }
+    .av-audio .av-node-icon { background: #ede9fe; color: #6d28d9; }
+    .av-quality .av-node-icon { background: #cffafe; color: #0e7490; }
+    .av-reliability .av-node-icon { background: #ffedd5; color: #c2410c; }
+    .av-fusion .av-node-icon { background: #dcfce7; color: #15803d; }
+    .av-consistency .av-node-icon { background: #fce7f3; color: #be185d; }
+    .av-output .av-node-icon { background: #e2e8f0; color: #334155; }
+
+    .av-branch {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .42rem;
+    }
+
+    .av-branch .av-node {
+        min-height: 78px;
+        align-items: flex-start;
+    }
+
+    .av-mini-note {
+        padding: .62rem .7rem;
+        border-radius: 11px;
+        background: #ffffff;
+        border: 1px dashed #cbd5e1;
+        color: #64748b;
+        font-size: .66rem;
+        line-height: 1.45;
+        margin-top: .55rem;
+    }
+
+    .av-tool-card {
+        padding: .68rem .75rem;
+        border-radius: 11px;
+        background: rgba(255,255,255,.88);
+        border: 1px solid #dbe3ee;
+        margin-bottom: .42rem;
+    }
+
+    .av-tool-title {
+        color: #0f172a;
+        font-size: .75rem;
+        font-weight: 800;
+    }
+
+    .av-tool-desc {
+        color: #64748b;
+        font-size: .65rem;
+        line-height: 1.4;
+        margin-top: .12rem;
+    }
+
+    .av-side-footer {
+        text-align: center;
+        color: #94a3b8;
+        font-size: .64rem;
+        padding-top: .25rem;
+    }
+
+    /* ---------- Streamlit widget polish ---------- */
+    div[data-testid="stFileUploader"] {
+        border-radius: 14px;
+    }
+
+    div[data-testid="stButton"] > button {
+        border-radius: 11px;
+        font-weight: 700;
+    }
+
+    div[data-testid="stMetric"] {
+        border: 1px solid #e2e8f0;
+        border-radius: 13px;
+        padding: .7rem .85rem;
+        background: rgba(255,255,255,.72);
+        box-shadow: 0 4px 12px rgba(15,23,42,.035);
+    }
+
+    /* ---------- Responsive sidebar ---------- */
+    @media (max-width: 900px) {
+        .av-hero {
+            padding: 1.45rem 1.25rem;
+        }
+
+        .av-hero p {
+            font-size: .94rem;
+        }
     }
     </style>
     """,
@@ -192,6 +448,9 @@ if "analysis_file_name" not in st.session_state:
 
 if "analysis_file_bytes" not in st.session_state:
     st.session_state.analysis_file_bytes = None
+
+if "pdf_bytes" not in st.session_state:
+    st.session_state.pdf_bytes = None
 
 
 # ---------------------------------------------------------
@@ -1076,7 +1335,7 @@ def build_pdf_report(
         ],
         [
             "Mean brightness",
-            f"{safe_float(visual.get('mean_brightness', 0)):.4f}",
+            f"{safe_float(visual.get('brightness', visual.get('mean_brightness', 0))):.4f}",
         ],
         [
             "Sharpness",
@@ -1494,71 +1753,318 @@ def build_pdf_report(
 
 
 # ---------------------------------------------------------
-# SIDEBAR
+# SIDEBAR — AViGuard SYSTEM MAP
 # ---------------------------------------------------------
 
 with st.sidebar:
 
-    st.markdown("## 🎥 AViGuard")
-
     st.markdown(
         """
-        **Context-Aware Audio-Visual Event Detection**
+        <div class="av-side-brand">
+            <div class="av-side-logo">◈</div>
+            <div>
+                <div class="av-side-title">AViGuard</div>
+                <div class="av-side-subtitle">Multimodal evidence intelligence</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-        AViGuard independently analyzes:
+    st.markdown(
+        '<div class="av-side-label">System architecture</div>',
+        unsafe_allow_html=True,
+    )
 
-        - 🎥 Visual evidence
-        - 🔊 Acoustic evidence
-        - 📊 Signal quality
-        - ⚖️ Modality reliability
-        - 🔗 Cross-modal consistency
+    # Use st.html rather than st.markdown for the architecture diagram.
+    # st.markdown can interpret indented HTML as a code block; st.html
+    # renders the diagram as actual HTML/CSS in Streamlit.
+    st.html(
+        """
+        <style>
+        .aviguard-map {
+            width: 100%;
+            box-sizing: border-box;
+            font-family: inherit;
+            color: #0f172a;
+        }
+
+        .aviguard-map * {
+            box-sizing: border-box;
+        }
+
+        .av-map-node {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 10px;
+            border: 1px solid #dbe3ee;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 2px 7px rgba(15, 23, 42, 0.045);
+        }
+
+        .av-map-icon {
+            width: 30px;
+            height: 30px;
+            flex: 0 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .av-map-content {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .av-map-title {
+            font-size: 12px;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+        }
+
+        .av-map-meta {
+            margin-top: 2px;
+            font-size: 10px;
+            line-height: 1.35;
+            color: #64748b;
+        }
+
+        .av-map-arrow {
+            height: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .av-map-branches {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 6px;
+        }
+
+        .av-map-branches .av-map-node {
+            align-items: flex-start;
+            min-height: 72px;
+            padding: 8px;
+        }
+
+        .av-map-branches .av-map-icon {
+            width: 27px;
+            height: 27px;
+            flex-basis: 27px;
+            font-size: 13px;
+        }
+
+        .av-map-branches .av-map-title {
+            font-size: 11px;
+        }
+
+        .av-map-branches .av-map-meta {
+            font-size: 9px;
+        }
+
+        .av-map-video .av-map-icon {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .av-map-audio .av-map-icon {
+            background: #ede9fe;
+            color: #6d28d9;
+        }
+
+        .av-map-input .av-map-icon {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .av-map-quality .av-map-icon {
+            background: #cffafe;
+            color: #0e7490;
+        }
+
+        .av-map-reliability .av-map-icon {
+            background: #ffedd5;
+            color: #c2410c;
+        }
+
+        .av-map-fusion .av-map-icon {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .av-map-consistency .av-map-icon {
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        .av-map-output .av-map-icon {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .av-map-mini {
+            margin-top: 8px;
+            padding: 8px 9px;
+            border: 1px dashed #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 9px;
+            line-height: 1.45;
+        }
+
+        .av-map-mini strong {
+            color: #334155;
+            font-weight: 800;
+        }
+
+        @media (max-width: 340px) {
+            .av-map-branches {
+                grid-template-columns: 1fr;
+            }
+
+            .av-map-branches .av-map-node {
+                min-height: auto;
+            }
+        }
+        </style>
+
+        <div class="aviguard-map" aria-label="AViGuard system architecture">
+
+            <div class="av-map-node av-map-input">
+                <div class="av-map-icon">📥</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Media Input</div>
+                    <div class="av-map-meta">Video + optional audio stream</div>
+                </div>
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-branches">
+
+                <div class="av-map-node av-map-video">
+                    <div class="av-map-icon">🎥</div>
+                    <div class="av-map-content">
+                        <div class="av-map-title">Visual</div>
+                        <div class="av-map-meta">R3D-18<br>Kinetics-400</div>
+                    </div>
+                </div>
+
+                <div class="av-map-node av-map-audio">
+                    <div class="av-map-icon">🔊</div>
+                    <div class="av-map-content">
+                        <div class="av-map-title">Acoustic</div>
+                        <div class="av-map-meta">AST<br>AudioSet • 16 kHz</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-node av-map-quality">
+                <div class="av-map-icon">📊</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Signal Quality</div>
+                    <div class="av-map-meta">Brightness • sharpness • RMS • activity</div>
+                </div>
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-node av-map-reliability">
+                <div class="av-map-icon">⚖️</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Modality Reliability</div>
+                    <div class="av-map-meta">Confidence + quality → adaptive trust</div>
+                </div>
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-node av-map-fusion">
+                <div class="av-map-icon">🔗</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Reliability-Aware Fusion</div>
+                    <div class="av-map-meta">Adaptive evidence contribution</div>
+                </div>
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-node av-map-consistency">
+                <div class="av-map-icon">🧩</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Cross-Modal Consistency</div>
+                    <div class="av-map-meta">Semantic agreement analysis</div>
+                </div>
+            </div>
+
+            <div class="av-map-arrow" aria-hidden="true">↓</div>
+
+            <div class="av-map-node av-map-output">
+                <div class="av-map-icon">📋</div>
+                <div class="av-map-content">
+                    <div class="av-map-title">Interpretable Output</div>
+                    <div class="av-map-meta">Evidence • diagnostics • decision trace • PDF</div>
+                </div>
+            </div>
+
+            <div class="av-map-mini">
+                <strong>Core principle:</strong>
+                independent visual and acoustic evidence is assessed first,
+                then weighted by estimated reliability before aggregation.
+            </div>
+
+        </div>
         """
     )
 
-    st.divider()
-
-    st.markdown("### Architecture")
+    st.markdown(
+        '<div class="av-side-label">Analysis tools</div>',
+        unsafe_allow_html=True,
+    )
 
     st.markdown(
         """
-        **Video**
+        <div class="av-tool-card">
+            <div class="av-tool-title">🧠 Explain Decision</div>
+            <div class="av-tool-desc">Trace how model evidence becomes the system interpretation.</div>
+        </div>
 
-        R3D-18  
-        Kinetics-400
+        <div class="av-tool-card">
+            <div class="av-tool-title">🎞️ Evidence Inspector</div>
+            <div class="av-tool-desc">Inspect sampled frames and the acoustic waveform.</div>
+        </div>
 
-        **Audio**
-
-        AST  
-        AudioSet
-
-        **Fusion**
-
-        Reliability-aware  
-        adaptive evidence fusion
-        """
+        <div class="av-tool-card">
+            <div class="av-tool-title">📄 Technical Report</div>
+            <div class="av-tool-desc">Generate a downloadable PDF analysis report.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
-
-    st.divider()
-
-    st.markdown("### 🔍 Analysis Tools")
 
     st.markdown(
         """
-        **Explain Decision**  
-        Trace how evidence became the final interpretation.
-
-        **Evidence Inspector**  
-        Inspect sampled video frames and acoustic waveform.
-
-        **PDF Report**  
-        Export the complete analysis as a technical report.
-        """
-    )
-
-    st.divider()
-
-    st.caption(
-        "AViGuard — Multimodal AI Prototype"
+        <div class="av-side-footer">
+            AViGuard • Audio + Vision • Evidence Fusion
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
 
@@ -1568,24 +2074,31 @@ with st.sidebar:
 
 st.markdown(
     """
-    <div class="hero">
-        <h1>🎥 AViGuard</h1>
+    <div class="av-hero">
+        <div class="av-hero-kicker">◈ Multimodal AI • Evidence Fusion</div>
+        <h1>AViGuard</h1>
         <p>
-        Context-Aware Audio-Visual Event Detection &
-        Cross-Modal Consistency Analysis
+            Context-Aware Audio-Visual Event Detection &amp;
+            Cross-Modal Consistency Analysis
         </p>
+        <div class="av-hero-chips">
+            <span class="av-chip">🎥 Temporal Vision</span>
+            <span class="av-chip">🔊 Acoustic Intelligence</span>
+            <span class="av-chip">⚖️ Reliability-Aware Fusion</span>
+            <span class="av-chip">🧩 Consistency Analysis</span>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    """
-    Upload a video and AViGuard will independently examine
-    its visual and acoustic signals, estimate the reliability
-    of each modality, compare their semantic evidence, and
-    provide an interpretable multimodal analysis.
-    """
+    '<div class="section-subtitle">'
+    'Upload a short video to inspect visual and acoustic evidence, '
+    'estimate modality reliability, and understand how the final '
+    'multimodal interpretation was formed.'
+    '</div>',
+    unsafe_allow_html=True,
 )
 
 
@@ -1642,6 +2155,7 @@ if uploaded_file is not None:
         st.session_state.analysis = None
         st.session_state.analysis_file_name = None
         st.session_state.analysis_file_bytes = None
+        st.session_state.pdf_bytes = None
         st.session_state.analysis_signature = current_signature
 
     st.divider()
@@ -1666,6 +2180,7 @@ if uploaded_file is not None:
 
             st.session_state.analysis_file_bytes = file_bytes
             st.session_state.analysis_file_name = uploaded_file.name
+            st.session_state.pdf_bytes = None
 
             suffix = os.path.splitext(
                 uploaded_file.name
@@ -2177,7 +2692,7 @@ if uploaded_file is not None:
 
             st.metric(
                 "Brightness",
-                f"{safe_float(visual_result.get('mean_brightness', 0)):.3f}",
+                f"{safe_float(visual_result.get('brightness', visual_result.get('mean_brightness', 0))):.3f}",
             )
 
             st.metric(
@@ -2504,6 +3019,5 @@ else:
 st.divider()
 
 st.caption(
-    "AViGuard • Context-Aware Audio-Visual Event Detection & "
-    "Cross-Modal Consistency Analysis"
+    "ViGuard • Designed & Developed by V T Rushi Kannan"
 )
