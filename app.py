@@ -3019,5 +3019,5 @@ else:
 st.divider()
 
 st.caption(
-    "ViGuard • Designed & Developed by V T Rushi Kannan"
+    "AViGuard • Designed & Developed by V T Rushi Kannan"
 )
