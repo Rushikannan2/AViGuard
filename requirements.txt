@@ -1,0 +1,15 @@
+streamlit
+torch
+torchvision
+transformers
+numpy
+pillow
+opencv-python-headless
+librosa
+soundfile
+scipy
+scikit-learn
+pandas
+matplotlib
+imageio-ffmpeg
+reportlab
