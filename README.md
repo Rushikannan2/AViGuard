@@ -29,8 +29,8 @@ For an uploaded video, AViGuard:
 
 ```text
                     ┌──────────────────────┐
-                    │   Video / Audio File  │
-                    │      MP4 / WEBM       │
+                    │   Video / Audio File │
+                    │      MP4 / WEBM      │
                     └──────────┬───────────┘
                                │
                 ┌──────────────┴──────────────┐
@@ -46,7 +46,7 @@ For an uploaded video, AViGuard:
                 │                             │
                 ▼                             ▼
        ┌──────────────────┐          ┌──────────────────┐
-       │     R3D-18       │          │       AST        │
+       │      R3D-18      │          │       AST        │
        │   Kinetics-400   │          │     AudioSet     │
        │ Visual Inference │          │ Audio Inference  │
        └────────┬─────────┘          └────────┬─────────┘
@@ -67,7 +67,7 @@ For an uploaded video, AViGuard:
                               ▼
                  ┌──────────────────────────┐
                  │ Reliability-Aware        │
-                 │ Adaptive Fusion          │
+                 │ Adaptive Fusion           │
                  └────────────┬─────────────┘
                               ▼
                  ┌──────────────────────────┐
@@ -79,7 +79,9 @@ For an uploaded video, AViGuard:
                  │ Interpretable Analysis   │
                  │ + Diagnostics + Report    │
                  └──────────────────────────┘
+```
 
+---
 
 Key Features
 Video Analysis
